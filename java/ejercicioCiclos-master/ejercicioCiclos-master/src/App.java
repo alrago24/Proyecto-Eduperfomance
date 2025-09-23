@@ -63,6 +63,6 @@ public class App {
                 intentos--;
                 System.out.println("Tiene " + intentos + " mas");
             }
-        }
+        }sc.close();
     }
 }

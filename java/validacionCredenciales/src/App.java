@@ -13,8 +13,7 @@ public class App {
         String name = "Alison";
 
         System.out.println("Bienvenido a Eduperfomance");
-
-
+        
         while (remainingAttempts > 0) {
             System.out.println("Por favor ingresa tu correo registrado:");
             username = sc.next();
