@@ -116,3 +116,28 @@ function mostrarMensajeExito() {
     const boton = document.querySelector('.btn-iniciar-sesion');
     boton.parentNode.insertBefore(mensajeExito, boton.nextSibling);
 }
+
+// Funcionalidad para mostrar/ocultar contraseña
+
+document.addEventListener('DOMContentLoaded', function () {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function () {
+        // Cambiar el tipo de input
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        // Cambiar el ícono
+        if (type === 'text') {
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
+            togglePassword.setAttribute('title', 'Ocultar contraseña');
+        } else {
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
+            togglePassword.setAttribute('title', 'Mostrar contraseña');
+        }
+    });
+});

@@ -62,7 +62,23 @@ footer {
     font-size: 18px;
 }
 
+.incorrecto {
+    width: 100%;
+    height: 30px;
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.correcto {
+    background-color: transparent;
+}
+
+.mailMessage {
+    display: none;
+}
 
 
 @media (min-width: 768px) {
