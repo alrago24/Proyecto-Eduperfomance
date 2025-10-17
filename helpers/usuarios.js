@@ -1,23 +1,23 @@
-const users = [];
+// const users = [];
 
-const registerForm = document.getElementById('registerForm');
+// const registerForm = document.getElementById('registerForm');
 
-registerForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+// registerForm.addEventListener('submit', (e) => {
+//     e.preventDefault();
 
-    const formData = new FormData(registerForm);
+//     const formData = new FormData(registerForm);
 
-    const newUser = {};
+//     const newUser = {};
 
-    formData.forEach((value, key) => {
-        newUser[key] = value;
-    });
+//     formData.forEach((value, key) => {
+//         newUser[key] = value;
+//     });
 
-    users.push(newUser);
+//     users.push(newUser);
 
-    console.log("Usuario agregado: ", newUser);
-    console.log("Todos los usuarios: ", users);
-});
+//     console.log("Usuario agregado: ", newUser);
+//     console.log("Todos los usuarios: ", users);
+// });
 
 
 

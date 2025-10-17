@@ -80,6 +80,13 @@ footer {
     display: none;
 }
 
+.phoneMessage {
+    display: none;
+}
+
+.documentMessage {
+    display: none;
+}
 
 @media (min-width: 768px) {
     .container-principal {

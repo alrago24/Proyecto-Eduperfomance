@@ -45,28 +45,46 @@
                 <form class="border rounded-4 p-5 shadow row g-3 bg-light " id="registerForm">
                     <div class="col-md-6">
                         <label for="inputName" class="form-label">Nombres</label>
-                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: Juan Jose" name="inputName" id="inputName">
+                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: Juan Jose"
+                            name="inputName" id="inputName">
                     </div>
                     <div class="col-md-6">
                         <label for="inputlastName" class="form-label">Apellidos</label>
-                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: Lopez Perez" name="inputlastName" id="inputlastName">
+                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: Lopez Perez"
+                            name="inputlastName" id="inputlastName">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputDocument" class="form-label">Documento</label>
+                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: 123456789"
+                            name="inputDocument" id="inputDocument">
+                            <span class="text-danger text-center documentMessage" id="documentMessage">*documento invalido</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputPhone" class="form-label">Telefono</label>
+                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: 312XXXXXXX"
+                            name="inputPhone" id="inputPhone">
+                            <span class="text-danger text-center phoneMessage" id="phoneMessage">*telefono invalido</span>
                     </div>
                     <div class="col-md-6">
                         <label for="inputemail" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control formulario__entrada" placeholder="Ej: usuario@correo.com" name="inputemail" id="inputemail">
-                        <span class="text-warning text-center mailMessage" id="mailMessage">*correo invalido</span>
+                        <input type="email" class="form-control formulario__entrada"
+                            placeholder="Ej: usuario@correo.com" name="inputemail" id="inputemail">
+                        <span class="text-danger text-center mailMessage" id="mailMessage">*correo invalido</span>
                     </div>
                     <div class="col-md-6">
                         <label for="inputUsername" class="form-label">Username</label>
-                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: juanjo24" name="inputUsername" id="inputUsername">
+                        <input type="text" class="form-control formulario__entrada" placeholder="Ej: juanjo24"
+                            name="inputUsername" id="inputUsername">
                     </div>
                     <div class="col-md-6">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control formulario__entrada" placeholder="8 caracteres" name="password" id="password">
+                        <input type="password" class="form-control formulario__entrada" placeholder="8 caracteres"
+                            name="password" id="password">
                     </div>
                     <div class="col-md-6">
                         <label for="confirmPassword" class="form-label">Confirma contraseña</label>
-                        <input type="password" class="form-control formulario__entrada" placeholder="8 caracteres" name="confirmPassword" id="confirmPassword">
+                        <input type="password" class="form-control formulario__entrada" placeholder="8 caracteres"
+                            name="confirmPassword" id="confirmPassword">
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="checkDefault">
@@ -74,8 +92,8 @@
                             Acepto terminos y condiciones
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-outline-success my-3 w-100">Enviar</button>
-                    <a class="btn btn-outline-success my-3 w-100" type="submit" href="./navBarNew.html">Enviar</a>
+                    <button type="submit" id="BtnRegister" class="btn btn-outline-success my-3 w-100">Enviar</button>
+                    <!-- <a class="btn btn-outline-success my-3 w-100" type="submit" href="./navBarNew.html">Enviar</a> -->
                 </form>
             </section>
             <section class="col-12 col-md-6 align-self-center mt-5">
@@ -120,13 +138,12 @@
         </div>
     </footer>
 
-    <script type="module" src="../helpers/verificarRegistro.js"></script>
-    <script type="module" src="../helpers/usuarios.js"></script>
-    
+    <script type="module" src="../script.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
-        
+
 </body>
 
 </html>
