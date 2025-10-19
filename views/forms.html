@@ -57,13 +57,14 @@
                         <label for="inputDocument" class="form-label">Documento</label>
                         <input type="text" class="form-control formulario__entrada" placeholder="Ej: 123456789"
                             name="inputDocument" id="inputDocument">
-                            <span class="text-danger text-center documentMessage" id="documentMessage">*documento invalido</span>
+                        <span class="text-danger text-center documentMessage" id="documentMessage">*documento
+                            invalido</span>
                     </div>
                     <div class="col-md-6">
                         <label for="inputPhone" class="form-label">Telefono</label>
                         <input type="text" class="form-control formulario__entrada" placeholder="Ej: 312XXXXXXX"
                             name="inputPhone" id="inputPhone">
-                            <span class="text-danger text-center phoneMessage" id="phoneMessage">*telefono invalido</span>
+                        <span class="text-danger text-center phoneMessage" id="phoneMessage">*telefono invalido</span>
                     </div>
                     <div class="col-md-6">
                         <label for="inputemail" class="form-label">Correo electrónico</label>
@@ -71,22 +72,26 @@
                             placeholder="Ej: usuario@correo.com" name="inputemail" id="inputemail">
                         <span class="text-danger text-center mailMessage" id="mailMessage">*correo invalido</span>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <label for="inputUsername" class="form-label">Username</label>
                         <input type="text" class="form-control formulario__entrada" placeholder="Ej: juanjo24"
                             name="inputUsername" id="inputUsername">
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <label for="password" class="form-label">Contraseña</label>
                         <input type="password" class="form-control formulario__entrada" placeholder="8 caracteres"
                             name="password" id="password">
                     </div>
-                    <div class="col-md-6">
-                        <label for="confirmPassword" class="form-label">Confirma contraseña</label>
-                        <input type="password" class="form-control formulario__entrada" placeholder="8 caracteres"
-                            name="confirmPassword" id="confirmPassword">
+                    <div class="formulario__grupo">
+                        <label class="formulario__etiqueta" for="genero">Género</label>
+                        <select class="formulario__seleccion form-control" id="genero" name="genero">
+                            <option class="--bs-success-rgb" value="">Seleccione...</option>
+                            <option class="--bs-success" value="masculino">Masculino</option>
+                            <option class="--bs-success" value="femenino">Femenino</option>
+                            <option class="--bs-success" value="otro">Otro</option>
+                        </select>
                     </div>
-                    <div class="form-check">
+                    <div class="formulario__grupo form-check">
                         <input class="form-check-input" type="checkbox" value="" id="checkDefault">
                         <label class="form-check-label" for="checkDefault">
                             Acepto terminos y condiciones
