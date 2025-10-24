@@ -88,6 +88,10 @@ footer {
     display: none;
 }
 
+.passwordMessage {
+    display: none;
+}
+
 @media (min-width: 768px) {
     .container-principal {
         height: 100vh;

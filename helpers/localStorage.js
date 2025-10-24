@@ -4,6 +4,7 @@ export function saveLocalStorage(key, value) {
 
 export function consultLocalStorage(key) {
     let users = JSON.parse(localStorage.getItem(key));
+    return users;
 }
 
 export function deleteLocalStorage(key) {

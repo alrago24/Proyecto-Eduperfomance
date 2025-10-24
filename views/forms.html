@@ -69,7 +69,7 @@
                     <div class="col-md-6">
                         <label for="inputemail" class="form-label">Correo electrónico</label>
                         <input type="email" class="form-control formulario__entrada"
-                            placeholder="Ej: usuario@correo.com" name="inputemail" id="inputemail">
+                            placeholder="Ej: usuario@correo.com" name="inputemail" id="inputemail" required>
                         <span class="text-danger text-center mailMessage" id="mailMessage">*correo invalido</span>
                     </div>
                     <!-- <div class="col-md-6">
@@ -81,6 +81,7 @@
                         <label for="password" class="form-label">Contraseña</label>
                         <input type="password" class="form-control formulario__entrada" placeholder="8 caracteres"
                             name="password" id="password">
+                        <span class="text-danger text-center mailMessage fs-6" id="passwordMessage">Contraseña invalida. Debe tener al menos 8 caracteres, una letra mayúscula y un número y un caracter especial.</span>
                     </div>
                     <div class="formulario__grupo">
                         <label class="formulario__etiqueta" for="genero">Género</label>
@@ -97,7 +98,8 @@
                             Acepto terminos y condiciones
                         </label>
                     </div>
-                    <button type="submit" id="BtnRegister" class="btn btn-outline-success my-3 w-100">Enviar</button>
+                    <button type="submit" id="BtnRegister"
+                        class="btn btn-outline-success my-3 w-100 BtnRegister">Enviar</button>
                     <!-- <a class="btn btn-outline-success my-3 w-100" type="submit" href="./navBarNew.html">Enviar</a> -->
                 </form>
             </section>
