@@ -42,12 +42,6 @@
     <section class="container my-5 bg-light rounded-3">
         <div id="saludoUsuario"
             class="d-flex row align-items-center mb-3 principal bg-success-subtle text-center rounded-3">
-            <!-- <h2><br>¡Hola, Alison!</h2> -->
-            <div id="nombrePerfil" class="d-flex align-items-center mt-3">
-                <!-- <img src="./img/perfil/foto-estudiante-2.png" alt="Avatar" class="rounded-circle img-fluid" width="130"
-                    height="130"> -->
-                <!-- <span class="ms-2 h4 fw-bold">Alison Diaz</span> -->
-            </div>
         </div>
         <div class="row contenedor">
             <div class="col-12">
@@ -59,12 +53,6 @@
                             aria-controls="home-tab-pane" aria-selected="true">Datos Estudiante</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link nav-link-principal text-primary-emphasis border border-success-subtle"
-                            id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
-                            role="tab" aria-controls="profile-tab-pane" aria-selected="false">Historial
-                            academico</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
                         <button class="nav-link nav-link-principal border border-success-subtle text-primary-emphasis "
                             id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button"
                             role="tab" aria-controls="contact-tab-pane" aria-selected="false">Cursos
@@ -72,21 +60,21 @@
                     </li>
                 </ul>
                 <div class="tab-content " id="myTabContent">
-                    <div class="tab-pane fade show active p-3" id="home-tab-pane" role="tabpanel"
+                    <div class="tab-pane fade show active p-4" id="home-tab-pane" role="tabpanel"
                         aria-labelledby="home-tab" tabindex="0">
                         <div class="container ">
-                            <div class="row shadow my-3 p-3 rounded-3">
-                                <div class="col-md-4 text-center">
+                            <div class="row shadow-sm p-4 rounded-3 align-items-center mb-4">
+                                <div class="col-md-3 text-center">
                                     <img id="avatarUsuario" src="./img/perfil/foto-estudiante-2.png"
                                         alt="Foto del estudiante" class="img-fluid rounded-circle shadow-sm mb-3"
-                                        style="max-width: 250px;">
+                                        style="max-width: 160px;">
                                 </div>
 
-                                <section class="col-md-8" id="listUsers">
+                                <section class="col-md-9" id="listUsers">
                                 </section>
                                 <!-- 🔹 Resumen académico dinámico -->
-                                <div class="card col-md-12 p-3 shadow-sm my-4">
-                                    <h5 class="text-primary text-center">Resumen Académico</h5>
+                                <div class="card shadow-sm p-3 mb-4 color">
+                                    <h5 class="text-success text-center">Resumen Académico</h5>
                                     <div class="row text-center mt-3">
                                         <div class="col-md-3"><strong>Promedio:</strong> <span
                                                 id="promedioGeneral">4.2</span></div>
@@ -98,8 +86,9 @@
                                                 id="avancePorcentaje">60%</span></div>
                                     </div>
                                 </div>
-                                <div class="card text-center shadow-sm p-3 my-4 bg-success-subtle border-0">
-                                    <h6 class="text-primary">Progreso total de la carrera</h6>
+                                <!-- 🔹 Progreso total -->
+                                <div class="card text-center shadow-sm p-4 mb-4 bg-success-subtle border-0 color">
+                                    <h6 class=""><strong>Progreso total de la carrera</strong></h6>
                                     <div class="progress" style="height: 25px;">
                                         <div class="progress-bar bg-success fw-bold" style="width: 60%;"
                                             id="progresoCarrera">60%</div>
@@ -109,30 +98,53 @@
                                 </div>
 
                                 <!-- 🔹 Materias inscritas -->
-                                <section class="my-4">
-                                    <h5 class="text-primary">Materias inscritas</h5>
-                                    <div id="materiasInscritas" class="row gy-3"></div>
-                                </section>
+                                <div class="card shadow-sm p-3 mb-4">
+                                    <h5 class="color">Materias inscritas</h5>
+                                    <div id="materiasInscritas" class="row"></div>
+                                </div>
 
                                 <!-- 🔹 Gráfico de rendimiento -->
-                                <div class="card p-3 shadow-sm my-4 text-center">
-                                    <h5 class="text-primary mb-3">Rendimiento Académico</h5>
+                                <div class="card p-3 shadow-sm mb-4">
+                                    <h5 class="color text-center mb-3">Rendimiento Académico</h5>
                                     <div class="d-flex justify-content-center">
-                                        <canvas id="graficoNotas" style="max-width: 850px; height: 220px;"></canvas>
+                                        <canvas id="graficoNotas" style="max-width: 700px; height: 250px;"></canvas>
                                     </div>
                                 </div>
 
-                                <section class="card shadow-sm p-3 my-4">
-                                    <h5 class="text-primary">Próximas actividades</h5>
-                                    <ul id="proximasActividades" class="list-group list-group-flush mt-2"></ul>
-                                </section>
-
-                                <!-- 🔹 Botón para editar perfil -->
-                                <div class="text-center my-4">
-                                    <button class="btn btn-outline-success" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditarPerfil">Editar perfil</button>
+                                <div class="card shadow-sm p-3 mb-4">
+                                    <h5 class="text-success mb-3">Historial Académico</h5>
+                                    <div class="mb-2 text-end">
+                                        <strong>Promedio acumulado: </strong>
+                                        <span id="promedioAcumulado" class="text-success fw-bold">0.0</span>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered align-middle text-center">
+                                            <thead class="table-success">
+                                                <tr>
+                                                    <th>Semestre</th>
+                                                    <th>Materia</th>
+                                                    <th>Nota Final</th>
+                                                    <th>Estado</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablaHistorial"></tbody>
+                                        </table>
+                                    </div>
                                 </div>
 
+                                <!-- 🔸 Gráfico histórico -->
+                                <div class="card shadow-sm p-3 mb-4">
+                                    <h5 class="text-success text-center mb-3">Evolución de Promedios</h5>
+                                    <div class="d-flex justify-content-center">
+                                        <canvas id="graficoHistorial" style=" max-width: 1000px; max-height: 350px;"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- 🔸 Próximas actividades -->
+                                <div class="card shadow-sm p-3">
+                                    <h5 class="text-success">Próximas Actividades</h5>
+                                    <ul id="proximasActividades" class="list-group list-group-flush mt-2"></ul>
+                                </div>
                                 <!-- 🔹 Modal para editar perfil -->
                                 <div class="modal fade" id="modalEditarPerfil" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
@@ -140,217 +152,105 @@
                                             <h5 class="text-center mb-3">Editar Perfil</h5>
                                             <input type="text" id="editarTelefono" class="form-control mb-2"
                                                 placeholder="Teléfono">
-                                            <input type="text" id="editarDireccion" class="form-control mb-2"
-                                                placeholder="Dirección">
+                                            <input type="text" id="editarCorreo" class="form-control mb-2"
+                                                placeholder="Correo electrónico">
                                             <button class="btn btn-success w-100" id="guardarCambios">Guardar
                                                 cambios</button>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                <!-- <div class="col-md-6">
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center ">
-                                        <h4 class="text-primary-emphasis">Carrera</h4>
-                                        <h4 class="text-success">Desarrollo de Software</h4>
-                                    </div>
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Semestre</h4>
-                                        <h4 class="text-success">1ero</h4>
-                                    </div>
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Turno</h4>
-                                        <h4 class="text-success">Sabados</h4>
-                                    </div>
-
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Promedio</h4>
-                                        <h4 class="text-success">3.5</h4>
-                                    </div>
-                                    <div class="bg-success-subtle rounded-4 text-center ">
-                                        <p class="text-primary-emphasis">Tus intereses nos ayudan a sincronizar con tus
-                                            <a href="#" class="text-decoration-none text-success">cursos a
-                                                desbloquear</a>
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <span class="badge bg-success-subtle text-primary-emphasis pill">Diseño</span>
-                                        <span class="badge bg-success-subtle text-primary-emphasis pill">Power Bi</span>
-                                        <span class="badge bg-success-subtle text-primary-emphasis pill">Excel</span>
-                                        <span class="badge bg-success-subtle text-primary-emphasis pill">Ingles</span>
-                                        <span
-                                            class="badge bg-success-subtle text-primary-emphasis pill">Marketing</span>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
-                        tabindex="0">
-                        <div class="container ">
-                            <div class="row shadow my-3 p-3 rounded-3">
-                                <div class="col-md-6">
-                                    <h4 class="fw-bold">Carrera:</h4>
-                                    <h2 class="text-success fw-bold">Desarrollo de Software</h2><br>
-                                    <h4 class="fw-bold text-start ">Materias:</h4><br>
-                                    <h5 class="text-success fw-bold text-start">Introducción a la Programación <button
-                                            type="button"
-                                            class="btn btn-link text-decoration-none text-primary-emphasis">Ver
-                                            detalle</button></h5><br>
-                                    <h5 class="text-success fw-bold text-start">Lógica de Programación <button
-                                            type="button"
-                                            class="btn btn-link text-decoration-none text-primary-emphasis">Ver
-                                            detalle</button></h5><br>
-                                    <h5 class="text-success fw-bold text-start">Metodologías agiles para la programación
-                                        <button type="button"
-                                            class="btn btn-link text-decoration-none text-primary-emphasis">Ver
-                                            detalle</button>
-                                    </h5><br>
-                                    <button class="btn btn-outline-primary">Completar perfil</button>
-                                    <div class="mt-4">
-                                        <h6 class="text-success">Actualmente vas a la mitad del semestre
-                                        </h6>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%;">
-                                                50%</div>
-                                        </div>
-                                        <p class="mt-2 text-muted">
-                                            Al tener actualizado tu perfil al 100% podremos enlazarte con oportunidades
-                                            de empleo de acuerdo a tu información.
-                                        </p>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center ">
-                                        <h4 class="text-primary-emphasis">Nota Global 1er Momento</h4>
-                                        <h4 class="text-success">3.5</h4>
-                                    </div>
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Nota Global 2do Momento</h4>
-                                        <h4 class="text-success">3.5</h4>
-                                    </div>
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Nota Global 3er Momento</h4>
-                                        <h4 class="text-success">En curso</h4>
-                                    </div>
-                                    <div class="bg-secondary-subtle p-3 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Promedio</h4>
-                                        <h4 class="text-success">3.5</h4>
-                                    </div>
-                                    <div class="bg-success-subtle rounded-4 text-center ">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="bg-secondary-subtle p-1 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Tu semestre va actualmente</h4>
-                                    </div>
-                                    <div class="bg-secondary-subtle p-2 rounded mb-3 text-center ">
-                                        <img src="./Img/perfil/barra-carga.webp" alt="% semestre" class="img-fluid"
-                                            width="200" height="200">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class=" bg-secondary-subtle p-1 rounded mb-3 text-center">
-                                        <h4 class="text-primary-emphasis">Performance</h4>
-                                    </div>
-                                    <div class="bg-secondary-subtle p-2 rounded mb-3 text-center ">
-                                        <img src="./Img/perfil/tabla estadistica.png" alt="estadistica notas"
-                                            class="img-fluid" width="auto" height="auto">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                     <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
                         tabindex="0">
-                        <div class="container ">
-                            <div class="row shadow my-3 p-5 rounded-3 justify-content-between">
-                                <div class="col-md-6">
-                                    <h4 class="fw-bold">Cursos virtuales completados</h4>
-                                    <ul class="col-12 col-md-8">
-                                        <li class="media list-group-item">
-                                            <div class="bg-success-subtle p-3 rounded mb-3 text-center ">
-                                                <img src="./Img/perfil/Level A1.jpg" alt="ingles"
-                                                    class="media-object-img img-fluid">
-                                                <div class="media-body">
-                                                    <h5 class=" mb-0 mb-1">Ingles Level 1 - 100%</h5>
-                                                    <button type="button" class="btn btn-success">Ver de nuevo</button>
-                                                </div>
+
+                            <!-- 🔸 A. Encabezado -->
+                            <div class="text-center mb-4">
+                                <h4 class="text-success fw-bold">Cursos y Recursos Complementarios</h4>
+                                <p class="text-muted">
+                                    Potencia tus habilidades con cursos virtuales y materiales de apoyo diseñados para
+                                    tu crecimiento académico.
+                                </p>
+                            </div>
+
+                            <!-- 🔸 B. Cursos recomendados -->
+                            <div class="card shadow-sm p-3 mb-4">
+                                <h5 class="text-success mb-3">Cursos recomendados para ti</h5>
+                                <div class="row row-cols-1 row-cols-md-3 g-3" id="cursosRecomendados">
+                                    <!-- Ejemplo de card de curso -->
+                                    <div class="col">
+                                        <div class="card h-100 border-0 shadow-sm">
+                                            <img src="./img/perfil/HTML1.jpg" class="card-img-top rounded-top"
+                                                alt="HTML Avanzado">
+                                            <div class="card-body">
+                                                <h6 class="fw-bold">HTML y CSS Avanzado</h6>
+                                                <p class="text-muted small">Domina las bases del desarrollo web moderno.
+                                                </p>
                                             </div>
-                                        </li>
-                                        <li class="media list-group-item">
-                                            <div class="bg-success-subtle p-3 rounded mb-3 text-center">
-                                                <img src="./Img/perfil/css1.jpg" alt="CSS" class="media-object-img">
-                                                <div class="media-body">
-                                                    <h5 class=" mb-0 mb-1">CSS 1 - 100%</h5>
-                                                    <button type="button" class="btn btn-success">Ver de nuevo</button>
-                                                </div>
+                                            <div class="card-footer bg-transparent border-0 text-end">
+                                                <button class="btn btn-outline-success btn-sm">Inscribirme</button>
                                             </div>
-                                        </li>
-                                        <li class="media list-group-item">
-                                            <div class="bg-success-subtle p-3 rounded mb-3 text-center">
-                                                <img src="./Img/perfil/HTML1.jpg" alt="HTML" class="media-object-img">
-                                                <div class="media-body">
-                                                    <h5 class=" mb-0 mb-1">HTML 1 - 100%</h5>
-                                                    <button type="button" class="btn btn-success">Ver de nuevo</button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul><br>
+                                        </div>
+                                    </div>
+                                    <!-- Puedes agregar más cards similares dinámicamente -->
                                 </div>
-                                <div class="col col-md-5">
-                                    <h4 class="fw-bold text-center">Cursos virtuales en progreso</h4>
-                                    <div class="bg-success-subtle p-3 rounded mb-3 text-center w-100 ">
-                                        <h5 class="text-primary-emphasis">Curso CSS 2</h5>
-                                        <iframe width="320px" height="220"
-                                            src="https://www.youtube.com/embed/uqkj7HQ7ids"
-                                            title="Curso Basico de CSS - 2. Selectores" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            referrerpolicy="strict-origin-when-cross-origin" class="img-fluid"
-                                            allowfullscreen></iframe>
+                            </div>
+
+                            <!-- 🔸 C. Progreso de cursos actuales -->
+                            <div class="card shadow-sm p-3 mb-4">
+                                <h5 class="text-success mb-3">Progreso en tus cursos actuales</h5>
+                                <div class="list-group" id="progresoCursos">
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span>JavaScript Básico</span>
+                                            <span class="text-muted">80%</span>
+                                        </div>
+                                        <div class="progress mt-1" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 80%;"></div>
+                                        </div>
                                     </div>
-                                    <div class="bg-success-subtle p-3 rounded mb-3 text-center">
-                                        <h5 class="text-primary-emphasis">Curso HTML 2</h5>
-                                        <iframe width="320px" height="220"
-                                            src="https://www.youtube.com/embed/TNQleomUw6U"
-                                            title="Curso Básico de HTML - 2. Etiquetas para Textos" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            referrerpolicy="strict-origin-when-cross-origin" class="img-fluid"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                    <div class="bg-success-subtle p-3 rounded mb-3 text-center">
-                                        <h5 class="text-primary-emphasis">Ingles 2</h5>
-                                        <iframe width="320" height="220" src="https://www.youtube.com/embed/iFHWC3S2vXY"
-                                            title="Lección 2 - Nivel Intermedio | Curso Vaughan para Aprender Inglés Gratis"
-                                            frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            referrerpolicy="strict-origin-when-cross-origin" class="img-fluid"
-                                            allowfullscreen></iframe>
-                                    </div>
-                                    <div class="bg-success-subtle rounded-4 text-center ">
+                                    <div class="list-group-item">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Introducción a Python</span>
+                                            <span class="text-muted">45%</span>
+                                        </div>
+                                        <div class="progress mt-1" style="height: 8px;">
+                                            <div class="progress-bar bg-warning" style="width: 45%;"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <h6 class="text-success">Actualmente vas a la mitad del semestre
-                                    </h6>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 50%;">
-                                            50%</div>
-                                    </div>
-                                    <p class="mt-2 text-muted">
-                                        Al tener actualizado tu perfil al 100% podremos enlazarte con oportunidades
-                                        de empleo de acuerdo a tu información.
-                                    </p>
-                                </div>
+                            </div>
+
+                            <!-- 🔸 D. Recursos adicionales -->
+                            <div class="card shadow-sm p-3">
+                                <h5 class="text-success mb-3">Recursos adicionales</h5>
+                                <ul class="list-group list-group-flush" id="recursosComplementarios">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="bi bi-file-earmark-pdf text-danger me-2"></i> Guía de repaso
+                                            para exámenes</span>
+                                        <a href="../assets/docs/guia-repaso.pdf" class="btn btn-outline-success btn-sm"
+                                            target="_blank">Ver</a>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="bi bi-play-circle text-primary me-2"></i> Tutorial: Estrategias
+                                            de estudio efectivas</span>
+                                        <a href="https://www.youtube.com/watch?v=ABC123"
+                                            class="btn btn-outline-success btn-sm" target="_blank">Ver video</a>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span><i class="bi bi-journal-text text-success me-2"></i> Plantilla para plan
+                                            de estudios</span>
+                                        <a href="../assets/docs/plan-estudios.docx"
+                                            class="btn btn-outline-success btn-sm" target="_blank">Descargar</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         </div>
     </section>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil Docente | EduPerformance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/docente.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-main text-white">
+        <div class="container">
+            <!-- Branding -->
+            <a href="navBarNew.html" class="navbar-brand">
+                <img src="./Img/book.png" alt="Logo" class="img-fluid">
+                <span class="h5 fw-bold">EDUPERFORMANCE</span></a>
+            <!-- Btn -->
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav"
+                aria-expanded="false" aria-label="Barra de navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--  Items-->
+            <div class="collapse navbar-collapse" id="mainNav">
+                <div class="nav ms-auto flex-column flex-md-row">
+                    <a href="./noticias_sesion.html" class="nav-link active">Noticias</a>
+                    <a href="./preguntas_frecuentes.html" class="nav-link">Preguntas</a>
+                    <a href="formularioDeAtencion.html" class="nav-link">Contacto</a>
+                    <a href="perfil.html" class="nav-link">Perfil</a>
+                    <a href="./recursos.html" class="nav-link">Recursos</a>
+                    <a href="#" class="nav-link" id="closeSession">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <h2 class="text-center text-primary-emphasis border border-success-subtle fw-bold mb-4">Panel del Docente</h2>
+
+        <!-- NAV TABS -->
+        <ul class="nav nav-tabs" id="docenteTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="panel-tab" data-bs-toggle="tab" data-bs-target="#panel-docente"
+                    type="button" role="tab">
+                    Panel Docente
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="gestion-tab" data-bs-toggle="tab" data-bs-target="#gestion-academica"
+                    type="button" role="tab">
+                    Gestión Académica
+                </button>
+            </li>
+        </ul>
+
+        <!-- TAB CONTENT -->
+        <div class="tab-content mt-3" id="docenteTabsContent">
+
+            <!-- 🔹 TAB 1: Panel Docente -->
+            <div class="tab-pane fade show active p-4" id="panel-docente" role="tabpanel">
+
+                <!-- Datos del docente -->
+                <div class="row shadow-sm p-4 rounded-3 align-items-center mb-4 bg-white">
+                    <div class="col-md-3 text-center">
+                        <img id="fotoDocente" src="./img/perfil/png-clipart-computer-icons-teacher-education-student-teacher-text-logo.png" class="img-fluid rounded-circle shadow-sm"
+                            style="max-width: 300px;">
+                    </div>
+                    <section class="col-md-9" id="infoDocente">
+                        <!-- Contenido dinámico -->
+                    </section>
+                </div>
+
+                <!-- Asignaturas -->
+                <div class="card shadow-sm p-3 mb-4">
+                    <h5 class="text-success mb-3 color">Asignaturas Asignadas</h5>
+                    <div class="row" id="asignaturasDocente"></div>
+                </div>
+
+                <!-- Desempeño general -->
+                <div class="card shadow-sm p-3 mb-4">
+                    <h5 class="text-success text-center mb-3">Desempeño Estudiantil</h5>
+                    <div class="d-flex justify-content-center">
+                        <canvas id="graficoDesempeno" style="max-width: 700px; max-height: 300px;"></canvas>
+                    </div>
+                </div>
+
+                <!-- Alertas académicas -->
+                <div class="card shadow-sm p-3">
+                    <h5 class="text-success mb-3">Alertas Académicas</h5>
+                    <ul id="alertasDocente" class="list-group list-group-flush"></ul>
+                </div>
+            </div>
+
+            <!-- 🔹 TAB 2: Gestión Académica -->
+            <div class="tab-pane fade p-4" id="gestion-academica" role="tabpanel">
+                <div class="card shadow-sm p-3 mb-4">
+                    <h5 class="text-success mb-3">Gestión de Evaluaciones</h5>
+                    <p class="text-muted">Desde aquí puedes crear, revisar o calificar evaluaciones.</p>
+                    <button class="btn btn-success mb-3" id="btnNuevaEvaluacion">
+                        <i class="bi bi-plus-circle"></i> Nueva Evaluación
+                    </button>
+                    <div id="listaEvaluaciones">
+                        <!-- Evaluaciones dinámicas -->
+                    </div>
+                </div>
+
+                <div class="card shadow-sm p-3">
+                    <h5 class="text-success mb-3">Recursos y Materiales</h5>
+                    <ul class="list-group list-group-flush" id="recursosDocente">
+                        <li class="list-group-item"><i class="bi bi-file-earmark-pdf text-danger me-2"></i> Guía de
+                            Evaluación Continua</li>
+                        <li class="list-group-item"><i class="bi bi-play-circle text-success me-2"></i> Video:
+                            Estrategias Didácticas Digitales</li>
+                        <li class="list-group-item"><i class="bi bi-cloud-arrow-down text-primary me-2"></i> Plantilla
+                            de Rúbricas (descargar)</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script type="module" src="../controllers/docenteController.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,8 @@
 import { Users } from "../models/userModel.js";
-import { saveLocalStorage } from "../helpers/localStorage.js";
+import { saveLocalStorage, consultLocalStorage } from "../helpers/localStorage.js";
 import { todosLosCamposValidos } from "../helpers/verificarRegistro.js";
+
+const usuarioActivo = consultLocalStorage("usuarioActivo");
 
 export function registerUser() {
     let registerForm = document.getElementById("registerForm");
@@ -12,7 +14,7 @@ export function registerUser() {
             let user = Object.fromEntries(formData);
             Users.push(user);
             saveLocalStorage("users", Users);
-            window.location.href = "../views/navBarNew.html";
+            window.location.href = "../views/login.html";
         } else {
             mostrarError('Por favor, completa todos los campos correctamente');
             return false;
@@ -22,42 +24,37 @@ export function registerUser() {
 
 function agregarSaludo() {
     let saludo = document.getElementById("saludoUsuario")
-    Users.forEach((user) => {
-        let division = document.createElement("div")
-        let saludoUsuario = document.createElement("h2")
-        division.classList.add("d-flex", "col-md-12", "justify-content-center", "bg-success-subtle", "text-center", "rounded-3")
-        saludoUsuario.textContent = "¡Hola, " + user.inputName + "!"
-        division.append(saludoUsuario)
-        saludo.append(division)
-    });
+    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"));
+    if (!saludo || !usuarioActivo) return;
+    saludo.innerHTML = "";
+    let division = document.createElement("div")
+    let saludoUsuario = document.createElement("h2")
+    division.classList.add("d-flex", "col-md-12", "justify-content-center", "bg-success-subtle", "text-center", "rounded-3")
+    saludoUsuario.textContent = "¡Hola, " + usuarioActivo.inputName + "!"
+    division.style.padding = "15px"
+    division.append(saludoUsuario)
+    saludo.append(division)
 }
-
-// function agregarNombrePerfil() {
-//     let namePerfil = document.getElementById("nombrePerfil")
-//     Users.forEach((user) => {
-//         let span = document.createElement("span")
-//         span.classList.add("ms-2", "h4", "fw-bold")
-//         span.textContent = user.inputName + " " + user.inputlastName
-//         namePerfil.append(span)
-//     });
-// }
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    // agregarSaludo();
-    listUsers();
-
-    // 🔹 2. Llama a las nuevas funciones (solo para el panel "Datos Estudiante")
+    agregarSaludo();
+    const usuarioActivoLocal = JSON.parse(localStorage.getItem("usuarioActivo"));
+    if (usuarioActivoLocal) {
+        listUsers(usuarioActivoLocal);
+    }
     cargarResumen();
     mostrarMaterias();
     renderizarGrafico();
     manejarEdicionPerfil();
     mostrarActividades();
+    cargarHistorial();
+    graficoHistorial();
+
     let botonCerrarSesion = document.getElementById("closeSession");
     if (botonCerrarSesion) {
         botonCerrarSesion.addEventListener("click", () => {
-            localStorage.removeItem("users");
+            localStorage.removeItem("usuarioActivo");
             window.location.href = "./noticias.html";
             console.log("Sesión cerrada");
         });
@@ -66,31 +63,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// if (usuarioActivo) {
+//     listUsers(usuarioActivo);
+// }
 
-function listUsers() {
+function listUsers(user) {
     let listUsers = document.getElementById("listUsers")
-    Users.forEach((user) => {
-        let card = document.createElement("div")
-        let nombre = document.createElement("h3")
-        let documento = document.createElement("p")
-        let correo = document.createElement("p")
-        let telefono = document.createElement("p")
-        let genero = document.createElement("p")
-        let editar = document.createElement("button")
-        let eliminar = document.createElement("button")
-        card.classList.add("card_usuario")
-        editar.classList.add("btn", "btn-outline-success", "m-2")
-        eliminar.classList.add("btn", "btn-outline-danger", "m-2")
-        nombre.innerHTML = "<strong>Nombre:</strong> <br>" + user.inputName + " " + user.inputlastName
-        documento.innerHTML = "<strong>Documento:</strong> <br>" + user.inputDocument
-        correo.innerHTML = "<strong>Correo:</strong> <br>" + user.inputemail
-        telefono.innerHTML = "<strong>Telefono:</strong> <br>" + user.inputPhone
-        genero.innerHTML = "<strong>Genero:</strong> <br>" + user.genero
-        editar.textContent = "Editar perfil"
-        eliminar.textContent = "Eliminar perfil"
-        card.append(nombre, documento, correo, telefono, genero, editar, eliminar)
-        listUsers.append(card)
-    });
+    listUsers.innerHTML = "";
+    let card = document.createElement("div")
+    let nombre = document.createElement("h3")
+    let documento = document.createElement("p")
+    let correo = document.createElement("p")
+    let telefono = document.createElement("p")
+    let genero = document.createElement("p")
+    let editar = document.createElement("button")
+    let eliminar = document.createElement("button")
+    card.classList.add("card_usuario")
+    editar.setAttribute("data-bs-toggle", "modal");
+    editar.setAttribute("data-bs-target", "#modalEditarPerfil");
+    editar.classList.add("btn", "btn-outline-success", "m-2")
+    eliminar.classList.add("btn", "btn-outline-danger", "m-2")
+    nombre.innerHTML = "<strong>Nombre:</strong> <br>" + user.inputName + " " + user.inputlastName
+    documento.innerHTML = "<strong>Documento:</strong> <br>" + user.inputDocument
+    correo.innerHTML = "<strong>Correo:</strong> <br>" + user.inputemail
+    telefono.innerHTML = "<strong>Telefono:</strong> <br>" + user.inputPhone
+    genero.innerHTML = "<strong>Genero:</strong> <br>" + user.genero
+    editar.textContent = "Editar perfil"
+    eliminar.textContent = "Eliminar perfil"
+    card.append(nombre, documento, correo, telefono, genero, editar, eliminar)
+    listUsers.append(card)
+    // });
 }
 
 
@@ -251,13 +253,108 @@ function manejarEdicionPerfil() {
 
     guardarBtn.addEventListener("click", () => {
         const telefono = document.getElementById("editarTelefono").value;
-        const direccion = document.getElementById("editarDireccion").value;
+        const correo = document.getElementById("editarCorreo").value;
 
+        let users = JSON.parse(localStorage.getItem("users")) || [];
         let usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo")) || {};
-        usuarioActivo.telefono = telefono;
-        usuarioActivo.direccion = direccion;
 
+        // Actualizar datos del usuario activo
+        usuarioActivo.inputPhone = telefono;
+        usuarioActivo.inputemail = correo;
+
+        // Actualizar en el array de usuarios
+        const index = users.findIndex(
+            u => u.inputDocument === usuarioActivo.inputDocument
+        );
+        if (index !== -1) {
+            users[index].inputPhone = telefono;
+            users[index].inputemail = correo;
+        }
+
+        localStorage.setItem("users", JSON.stringify(users));
         localStorage.setItem("usuarioActivo", JSON.stringify(usuarioActivo));
+        // Refrescar la interfaz
+        listUsers(usuarioActivo);
+        // Cerrar modal
+        const modal = bootstrap.Modal.getInstance(
+            document.getElementById("modalEditarPerfil")
+        );
+        modal.hide();
         alert("Perfil actualizado correctamente ✅");
+
+    });
+}
+
+function cargarHistorial() {
+    const materiasCursadas = [
+        { semestre: 1, materia: "Fundamentos de Programación", nota: 4.3, estado: "Aprobada" },
+        { semestre: 1, materia: "Matemáticas Discretas", nota: 3.9, estado: "Aprobada" },
+        { semestre: 2, materia: "Bases de Datos", nota: 4.5, estado: "Aprobada" },
+        { semestre: 2, materia: "Diseño Web", nota: 4.7, estado: "Aprobada" },
+        { semestre: 3, materia: "Estadística", nota: 3.8, estado: "Aprobada" },
+    ];
+
+    const tabla = document.getElementById("tablaHistorial");
+    tabla.innerHTML = "";
+
+    materiasCursadas.forEach(m => {
+        const fila = document.createElement("tr");
+        const color = m.nota >= 4.0 ? "text-success" : m.nota >= 3.0 ? "text-warning" : "text-danger";
+        fila.innerHTML = `
+        <td class="text-center">${m.semestre}</td>
+        <td>${m.materia}</td>
+        <td class="text-center ${color} fw-bold">${m.nota}</td>
+        <td class="text-center">${m.estado}</td>
+    `;
+        tabla.appendChild(fila);
+    });
+
+    // Calcular promedio
+    const promedio = (materiasCursadas.reduce((acc, m) => acc + m.nota, 0) / materiasCursadas.length).toFixed(2);
+    document.getElementById("promedioAcumulado").textContent = promedio;
+}
+
+// Gráfico de evolución
+function graficoHistorial() {
+    const ctx = document.getElementById("graficoHistorial");
+    if (!ctx) return;
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: ["Semestre 1", "Semestre 2", "Semestre 3"],
+            datasets: [{
+                label: "Promedio por semestre",
+                data: [4.1, 4.4, 3.9],
+                borderColor: "#198754",
+                fill: true,
+                tension: 0.3,
+                backgroundColor: "rgba(21, 86, 56, 0.5)",
+                pointBackgroundColor: "#20c997",
+                pointRadius: 5,
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: "#198754",
+                    titleColor: "#fff",
+                    bodyColor: "#fff",
+                    cornerRadius: 6
+                }
+            },
+            scales: {
+                x: { grid: { display: false }, title: { display: true, text: "" } },
+                y: {
+                    beginAtZero: true,
+                    max: 5,
+                    title: { display: true, text: "Promedio" },
+                    ticks: { stepSize: 1 }
+                }
+            }
+        }
     });
 }

@@ -1,7 +1,7 @@
 /* -------------GENERAL STYLE-------------*/
 body {
     background-color: #326c5d;
-    font-family: 'Times New Roman', Times, serif !important;
+    font-family: 'Times New Roman', Times, serif;
     color: rgb(4, 56, 87)!important;
 }
 
@@ -16,7 +16,6 @@ body {
 a {
     color: rgb(0, 0, 0) !important;
 }
-
 
 .navbar-brand>img {
     width: 55px;
@@ -44,16 +43,4 @@ a {
 
 .nav-link-principal {
     background-color: #508a7a;
-}
-
-.media-object-img {
-    --tamano: 100%;
-    width: var(--tamano);
-    height: var(--tamano);
-    margin-right: 15px;
-    margin-bottom: 20px;
-}
-
-footer {
-    background-color: rgb(56, 95, 117);
 }

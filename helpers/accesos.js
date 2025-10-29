@@ -1,3 +1,7 @@
+
+import { consultLocalStorage, saveLocalStorage } from "./localStorage.js";
+
+
 // Cuentas válidas
 const cuentasValidas = [
     {
@@ -15,11 +19,42 @@ const cuentasValidas = [
 ];
 
 // Función para validar credenciales
-function validarCredenciales(email, password) {
-    return cuentasValidas.some(cuenta =>
-        cuenta.email === email && cuenta.password === password
-    );
+// function validarCredenciales(email, password) {
+//     return cuentasValidas.some(cuenta =>
+//         cuenta.email === email && cuenta.password === password
+//     );
+// }
+
+let formularioLogin = document.getElementById("formLogin")
+if (formularioLogin) {
+    formularioLogin.addEventListener("submit", (e) => {
+        e.preventDefault()
+        let formData = new FormData(formularioLogin);
+        let usuario = Object.fromEntries(formData)
+        console.log("Usuario que intenta ingresar:", usuario);
+        let usuarios = consultLocalStorage("users") || [];
+        console.log("Usuarios registrados:", usuarios);
+        // let usuarios = consultLocalStorage("users")
+        // console.log(Usuarios);
+        let auth = usuarios.find(
+            (u) => u.inputemail === usuario.email && u.password === usuario.password)
+        if (auth) {
+            mostrarMensajeExito();
+            saveLocalStorage("usuarioActivo", auth)
+            setTimeout(() => {
+                window.location.href = "../views/navBarNew.html";
+            }, 1000);
+
+        } else {
+            mostrarError('Correo electrónico o contraseña incorrectos.');
+        }
+
+    })
 }
+
+
+
+
 
 // Función para mostrar mensajes de error
 function mostrarError(mensaje) {
@@ -57,53 +92,56 @@ function limpiarErrores() {
 // Evento que se ejecuta cuando el DOM está cargado
 document.addEventListener('DOMContentLoaded', function () {
     const formulario = document.querySelector('form');
-    const inputEmail = document.getElementById('email');
+    const inputEmail = document.getElementById('inputEmail');
     const inputPassword = document.getElementById('password');
 
     // Prevenir el envío normal del formulario
-    formulario.addEventListener('submit', function (event) {
-        event.preventDefault(); // Evita que se envíe el formulario normalmente
+    // formulario.addEventListener('submit', function (event) {
+    //     event.preventDefault(); // Evita que se envíe el formulario normalmente
 
-        // Obtener valores de los campos
-        const email = inputEmail.value.trim();
-        const password = inputPassword.value;
+    // Obtener valores de los campos
+    const email = inputEmail.value.trim();
+    const password = inputPassword.value;
 
-        // Limpiar errores anteriores
-        limpiarErrores();
+    // Limpiar errores anteriores
+    limpiarErrores();
 
-        // Validar que los campos no estén vacíos
-        if (!email || !password) {
-            mostrarError('Por favor, completa todos los campos.');
-            return;
-        }
+    // Validar que los campos no estén vacíos
+    if (!email || !password) {
+        mostrarError('Por favor, completa todos los campos.');
+        return;
+    }
 
-        // Validar formato de email básico
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            mostrarError('Por favor, ingresa un formato de correo válido.');
-            return;
-        }
+    // Validar formato de email básico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        mostrarError('Por favor, ingresa un formato de correo válido.');
+        return;
+    }
 
-        // Validar credenciales
-        if (validarCredenciales(email, password)) {
-            // Credenciales correctas - redirigir
-            mostrarMensajeExito();
-            setTimeout(() => {
-                window.location.href = 'navBarNew.html';
-            }, 1500);
-        } else {
-            // Credenciales incorrectas
-            mostrarError('Correo electrónico o contraseña incorrectos.');
+    // Validar credenciales
+    // if (validarCredenciales(email, password)) {
+    // Credenciales correctas - redirigir
+    // mostrarMensajeExito();
+    // setTimeout(() => {
+    //     window.location.href = 'navBarNew.html';
+    //     // }, 1500);
+    // } else {
+    //     // Credenciales incorrectas
+    //     mostrarError('Correo electrónico o contraseña incorrectos.');
 
-            // Limpiar campos por seguridad
-            inputPassword.value = '';
-        }
-    });
+    //     // Limpiar campos por seguridad
+    //     inputPassword.value = '';
+    // }
 
-    // Limpiar errores cuando el usuario empiece a escribir
     inputEmail.addEventListener('input', limpiarErrores);
     inputPassword.addEventListener('input', limpiarErrores);
 });
+
+// Limpiar errores cuando el usuario empiece a escribir
+// inputEmail.addEventListener('input', limpiarErrores);
+// inputPassword.addEventListener('input', limpiarErrores);
+
 
 // Función para mostrar mensaje de éxito
 function mostrarMensajeExito() {
