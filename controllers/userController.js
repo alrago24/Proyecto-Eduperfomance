@@ -14,7 +14,8 @@ export function registerUser() {
             let user = Object.fromEntries(formData);
             Users.push(user);
             saveLocalStorage("users", Users);
-            window.location.href = "../views/login.html";
+            setTimeout(() => {window.location.href = "../views/login.html";}, 500);
+            alert("¡Registro exitoso! Redirigiendo al login...");
         } else {
             mostrarError('Por favor, completa todos los campos correctamente');
             return false;
@@ -63,9 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// if (usuarioActivo) {
-//     listUsers(usuarioActivo);
-// }
+
 
 function listUsers(user) {
     let listUsers = document.getElementById("listUsers")
@@ -92,7 +91,6 @@ function listUsers(user) {
     eliminar.textContent = "Eliminar perfil"
     card.append(nombre, documento, correo, telefono, genero, editar, eliminar)
     listUsers.append(card)
-    // });
 }
 
 

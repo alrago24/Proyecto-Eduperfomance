@@ -42,7 +42,7 @@ export function validateForm() {
                     e.target.style.borderColor = camposValidos.inputemail ? "green" : "red";
                     document.getElementById("mailMessage").style.display = camposValidos.inputemail ? "none" : "block";
                     break;
-                case "password":
+                case "inputPassword":
                     camposValidos.inputPassword = expresiones.password.test(e.target.value);
                     e.target.style.borderColor = camposValidos.inputPassword ? "green" : "red";
                     document.getElementById("passwordMessage").style.display = camposValidos.inputPassword ? "none" : "block";

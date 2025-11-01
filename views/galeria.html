@@ -35,7 +35,7 @@
                     <a href="./noticias_sesion.html" class="nav-link active">Noticias</a>
                     <a href="./preguntas_frecuentes.html" class="nav-link">Preguntas</a>
                     <a href="formularioDeAtencion.html" class="nav-link">Contacto</a>
-                    <a href="perfil.html" class="nav-link">Perfil</a>
+                    <a href="#" class="nav-link" id="perfilLink">Perfil</a>
                     <a href="./recursos.html" class="nav-link">Recursos</a>
                     <a href="#" class="nav-link" id="closeSession">Cerrar sesión</a>
                 </div>
@@ -259,7 +259,11 @@
         </div>
     </footer>
 
-
+    <script type="module">
+        import { configurarPerfilLink } from "../controllers/navbarController.js";
+        configurarPerfilLink();
+    </script>
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eJ5L0S34I9eFw"
         crossorigin="anonymous"></script>

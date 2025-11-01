@@ -1,59 +1,89 @@
 
 import { consultLocalStorage, saveLocalStorage } from "./localStorage.js";
 
-
-// Cuentas válidas
-const cuentasValidas = [
+// Arreglo estático de docentes
+const docentes = [
     {
-        email: "Sergio123@cesde.net",
-        password: "Acceso123*"
+        correo: "carlos.rodriguez@eduperformance.com",
+        password: "12345",
+        nombre: "Carlos Rodríguez",
+        especialidad: "Ingeniería de Software",
+        experiencia: "6 años",
     },
     {
-        email: "Alison123@cesde.net",
-        password: "Acceso123*"
-    },
-    {
-        email: "Andres123@cesde.net",
-        password: "Acceso123*"
+        correo: "maria.gomez@eduperformance.com",
+        password: "12345",
+        nombre: "María Gómez",
+        especialidad: "Matemáticas",
+        experiencia: "8 años",
     }
 ];
 
-// Función para validar credenciales
-// function validarCredenciales(email, password) {
-//     return cuentasValidas.some(cuenta =>
-//         cuenta.email === email && cuenta.password === password
-//     );
-// }
+document.addEventListener("DOMContentLoaded", () => {
+    const formularioLogin = document.getElementById("formLogin")
 
-let formularioLogin = document.getElementById("formLogin")
-if (formularioLogin) {
+    if (!formularioLogin) {
+        console.warn("No se encontró el formulario de login");
+        return;
+    }
+
     formularioLogin.addEventListener("submit", (e) => {
-        e.preventDefault()
-        let formData = new FormData(formularioLogin);
-        let usuario = Object.fromEntries(formData)
-        console.log("Usuario que intenta ingresar:", usuario);
-        let usuarios = consultLocalStorage("users") || [];
-        console.log("Usuarios registrados:", usuarios);
-        // let usuarios = consultLocalStorage("users")
-        // console.log(Usuarios);
-        let auth = usuarios.find(
-            (u) => u.inputemail === usuario.email && u.password === usuario.password)
-        if (auth) {
-            mostrarMensajeExito();
-            saveLocalStorage("usuarioActivo", auth)
-            setTimeout(() => {
-                window.location.href = "../views/navBarNew.html";
-            }, 1000);
+        e.preventDefault();
 
-        } else {
-            mostrarError('Correo electrónico o contraseña incorrectos.');
+        // Obtener datos del formulario
+        const correo = document.getElementById("inputemail").value.trim();
+        const password = document.getElementById("inputPassword").value.trim();
+        const rol = document.getElementById("rol").value.trim(); // 👈 Nuevo campo de rol
+
+        if (!correo || !password) {
+            alert("Por favor completa todos los campos.");
+            return;
         }
 
+        // 🧩 Si el usuario selecciona 'Estudiante'
+        if (rol === "estudiante") {
+            const usuarios = consultLocalStorage("users") || [];
+            const auth = usuarios.find(
+                (u) =>
+                    u.inputemail?.toLowerCase() === correo.toLowerCase() &&
+                    u.inputPassword === password
+            );
+
+            if (auth) {
+                saveLocalStorage("usuarioActivo", auth);
+                mostrarMensajeExito();
+                setTimeout(() => {
+                    window.location.href = "../views/perfil.html";
+                }, 500);
+            } else {
+                alert("Credenciales de estudiante incorrectas");
+            }
+        }
+
+        // 👨‍🏫 Si el usuario selecciona 'Docente'
+        if (rol === "docente") {
+            const authDocente = docentes.find(
+                (d) => d.correo === correo && d.password === password
+            );
+
+            if (authDocente) {
+                mostrarMensajeExito()
+                saveLocalStorage("docenteActivo", authDocente);
+                setTimeout(() => {
+                    window.location.href = "../views/perfilDocente.html";
+                }, 1000);
+            } else {
+                alert("Credenciales de docente incorrectas");
+            }
+        }
     })
+});
+
+export function cerrarSesion() {
+    localStorage.removeItem("usuarioActivo");
+    localStorage.removeItem("docenteActivo");
+    window.location.href = "./login.html";
 }
-
-
-
 
 
 // Función para mostrar mensajes de error
@@ -92,12 +122,9 @@ function limpiarErrores() {
 // Evento que se ejecuta cuando el DOM está cargado
 document.addEventListener('DOMContentLoaded', function () {
     const formulario = document.querySelector('form');
-    const inputEmail = document.getElementById('inputEmail');
-    const inputPassword = document.getElementById('password');
+    const inputEmail = document.getElementById('inputemail');
+    const inputPassword = document.getElementById('inputPassword');
 
-    // Prevenir el envío normal del formulario
-    // formulario.addEventListener('submit', function (event) {
-    //     event.preventDefault(); // Evita que se envíe el formulario normalmente
 
     // Obtener valores de los campos
     const email = inputEmail.value.trim();
@@ -119,28 +146,12 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Validar credenciales
-    // if (validarCredenciales(email, password)) {
-    // Credenciales correctas - redirigir
-    // mostrarMensajeExito();
-    // setTimeout(() => {
-    //     window.location.href = 'navBarNew.html';
-    //     // }, 1500);
-    // } else {
-    //     // Credenciales incorrectas
-    //     mostrarError('Correo electrónico o contraseña incorrectos.');
-
-    //     // Limpiar campos por seguridad
-    //     inputPassword.value = '';
-    // }
 
     inputEmail.addEventListener('input', limpiarErrores);
     inputPassword.addEventListener('input', limpiarErrores);
 });
 
-// Limpiar errores cuando el usuario empiece a escribir
-// inputEmail.addEventListener('input', limpiarErrores);
-// inputPassword.addEventListener('input', limpiarErrores);
+
 
 
 // Función para mostrar mensaje de éxito
@@ -159,7 +170,7 @@ function mostrarMensajeExito() {
 
 document.addEventListener('DOMContentLoaded', function () {
     const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
+    const passwordInput = document.getElementById('inputPassword');
     const eyeIcon = document.getElementById('eyeIcon');
 
     togglePassword.addEventListener('click', function () {

@@ -33,7 +33,7 @@
                     <a href="./noticias_sesion.html" class="nav-link active">Noticias</a>
                     <a href="./preguntas_frecuentes.html" class="nav-link">Preguntas</a>
                     <a href="formularioDeAtencion.html" class="nav-link">Contacto</a>
-                    <a href="perfil.html" class="nav-link">Perfil</a>
+                    <a href="#" class="nav-link" id="perfilLink">Perfil</a> 
                     <a href="./recursos.html" class="nav-link">Recursos</a>
                     <a href="#" class="nav-link" id="closeSession">Cerrar sesión</a>
                 </div>
@@ -41,53 +41,52 @@
         </div>
     </nav>
 
-        <div class="full-page-wrapper">
-            <div class="contenedor-general rounded-4">
-                <!-- CONTENIDO DEL ENCABEZADO DE PÁGINA (TÍTULO Y SUBTÍTULO) -->
-                <header class="header-content-wrapper">
-                    <h1>Recursos y Material de Estudio</h1>
-                    <p>Explora nuestros materiales por categoría.</p>
-                </header>
-                <div class="row">
-                    <div class="col">
-                        <main class="contenido-recursos-didactico">
-                            <div class="grid-didactico">
-                                <!-- Ítem: Guía de Álgebra Lineal -->
-                                <div class="item-didactico" data-bs-toggle="modal" data-bs-target="#modalAlgebraLineal">
-                                    <div class="circulo-icono bg-algebra"><i class="fas fa-file-pdf"></i></div>
-                                    <p class="nombre-material">Guía de Álgebra</p>
-                                </div>
-                                <!-- Ítem: Video: Introducción al Cálculo -->
-                                <div class="item-didactico" data-bs-toggle="modal"
-                                    data-bs-target="#modalIntroduccionCalculo">
-                                    <div class="circulo-icono bg-calculo"><i class="fas fa-video"></i></div>
-                                    <p class="nombre-material">Video Cálculo</p>
-                                </div>
-                                <!-- Ítem: Tutorial de Python para Principiantes -->
-                                <div class="item-didactico" data-bs-toggle="modal"
-                                    data-bs-target="#modalPythonTutorial">
-                                    <div class="circulo-icono bg-python"><i class="fab fa-python"></i></div>
-                                    <p class="nombre-material">Tutorial Python</p>
-                                </div>
-                                <!-- Ítem: Cheatsheet de JavaScript -->
-                                <div class="item-didactico" data-bs-toggle="modal"
-                                    data-bs-target="#modalJavascriptCheatsheet">
-                                    <div class="circulo-icono bg-javascript"><i class="fab fa-js"></i></div>
-                                    <p class="nombre-material">Cheatsheet JS</p>
-                                </div>
-                                <!-- Ítem: Ebook: Gestión del Tiempo Efectiva -->
-                                <div class="item-didactico" data-bs-toggle="modal" data-bs-target="#modalGestionTiempo">
-                                    <div class="circulo-icono bg-gestion"><i class="fas fa-clock"></i></div>
-                                    <p class="nombre-material">Gestión del Tiempo</p>
-                                </div>
-                                <!-- Puedes añadir más materiales aquí -->
+    <div class="full-page-wrapper">
+        <div class="contenedor-general rounded-4">
+            <!-- CONTENIDO DEL ENCABEZADO DE PÁGINA (TÍTULO Y SUBTÍTULO) -->
+            <header class="header-content-wrapper">
+                <h1>Recursos y Material de Estudio</h1>
+                <p>Explora nuestros materiales por categoría.</p>
+            </header>
+            <div class="row">
+                <div class="col">
+                    <main class="contenido-recursos-didactico">
+                        <div class="grid-didactico">
+                            <!-- Ítem: Guía de Álgebra Lineal -->
+                            <div class="item-didactico" data-bs-toggle="modal" data-bs-target="#modalAlgebraLineal">
+                                <div class="circulo-icono bg-algebra"><i class="fas fa-file-pdf"></i></div>
+                                <p class="nombre-material">Guía de Álgebra</p>
                             </div>
-                        </main>
-                    </div>
+                            <!-- Ítem: Video: Introducción al Cálculo -->
+                            <div class="item-didactico" data-bs-toggle="modal"
+                                data-bs-target="#modalIntroduccionCalculo">
+                                <div class="circulo-icono bg-calculo"><i class="fas fa-video"></i></div>
+                                <p class="nombre-material">Video Cálculo</p>
+                            </div>
+                            <!-- Ítem: Tutorial de Python para Principiantes -->
+                            <div class="item-didactico" data-bs-toggle="modal" data-bs-target="#modalPythonTutorial">
+                                <div class="circulo-icono bg-python"><i class="fab fa-python"></i></div>
+                                <p class="nombre-material">Tutorial Python</p>
+                            </div>
+                            <!-- Ítem: Cheatsheet de JavaScript -->
+                            <div class="item-didactico" data-bs-toggle="modal"
+                                data-bs-target="#modalJavascriptCheatsheet">
+                                <div class="circulo-icono bg-javascript"><i class="fab fa-js"></i></div>
+                                <p class="nombre-material">Cheatsheet JS</p>
+                            </div>
+                            <!-- Ítem: Ebook: Gestión del Tiempo Efectiva -->
+                            <div class="item-didactico" data-bs-toggle="modal" data-bs-target="#modalGestionTiempo">
+                                <div class="circulo-icono bg-gestion"><i class="fas fa-clock"></i></div>
+                                <p class="nombre-material">Gestión del Tiempo</p>
+                            </div>
+                            <!-- Puedes añadir más materiales aquí -->
+                        </div>
+                    </main>
                 </div>
-            </div> <!-- FIN .contenedor-general -->
+            </div>
+        </div> <!-- FIN .contenedor-general -->
 
-        </div> <!-- FIN .full-page-wrapper -->
+    </div> <!-- FIN .full-page-wrapper -->
     <!-- Modal: Guía de Álgebra Lineal -->
     <div class="modal fade" id="modalAlgebraLineal" tabindex="-1" aria-labelledby="modalAlgebraLinealLabel"
         aria-hidden="true">
@@ -235,6 +234,11 @@
             </nav>
         </div>
     </footer>
+    <script type="module">
+        import { configurarPerfilLink } from "../controllers/navbarController.js";
+        configurarPerfilLink();
+    </script>
+    </script>
     <script type="module" src="../controllers/userController.js"></script>
     <!-- Script de Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -11,12 +11,22 @@ function cargarInfoDocente() {
     const info = document.getElementById("infoDocente");
     if (!info) return;
 
-    const docente = {
+    // const docente = {
+    //     nombre: "Carlos Rodríguez",
+    //     correo: "carlos.rodriguez@eduperformance.com",
+    //     especialidad: "Ingeniería de Software",
+    //     experiencia: "8 años",
+    // };
+
+    const docenteActivo = JSON.parse(localStorage.getItem("docenteActivo"));
+
+    const docente = docenteActivo || {
         nombre: "Carlos Rodríguez",
         correo: "carlos.rodriguez@eduperformance.com",
         especialidad: "Ingeniería de Software",
-        experiencia: "8 años",
+        experiencia: "6 años"
     };
+
 
     info.innerHTML = `
     <h4 class="fw-bold text-success">${docente.nombre}</h4>
@@ -24,6 +34,15 @@ function cargarInfoDocente() {
     <p><strong>Especialidad:</strong> ${docente.especialidad}</p>
     <p><strong>Experiencia:</strong> ${docente.experiencia}</p>
 `;
+}
+
+const btnCerrar = document.getElementById("closeSession");
+if (btnCerrar) {
+    btnCerrar.addEventListener("click", () => {
+        localStorage.removeItem("usuarioActivo");
+        localStorage.removeItem("docenteActivo");
+        window.location.href = "./login.html";
+    });
 }
 
 function cargarAsignaturas() {
@@ -38,13 +57,13 @@ function cargarAsignaturas() {
 
     contenedor.innerHTML = asignaturas.map(a => `
     <div class="col-md-4 mb-3">
-      <div class="card border-0 shadow-sm p-3 h-100">
+    <div class="card border-0 shadow-sm p-3 h-100">
         <h6 class="fw-bold text-success">${a.nombre}</h6>
         <p class="mb-1"><strong>Grupo:</strong> ${a.grupo}</p>
         <p><strong>Estudiantes:</strong> ${a.estudiantes}</p>
-      </div>
     </div>
-  `).join("");
+    </div>
+`).join("");
 }
 
 function renderizarGraficoDesempeno() {
